@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# Nuxt build output
+.nuxt/
+.output/
+.data/
+dist/
+
+# env (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# logs & OS files
+*.log
+.DS_Store
