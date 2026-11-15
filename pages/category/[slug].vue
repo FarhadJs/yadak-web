@@ -3,7 +3,8 @@ const route = useRoute();
 const router = useRouter();
 const slug = String(route.params.slug);
 
-const { data: categories } = await useAsyncData('all:categories', () => $fetch<any[]>('/api/categories'), {
+const { api } = useApi();
+const { data: categories } = await useAsyncData('all:categories', () => api<any[]>('/api/categories'), {
   default: () => [],
 });
 
@@ -26,7 +27,7 @@ const page = computed(() => Number(route.query.page || 1));
 const { data } = await useAsyncData(
   `category:${slug}`,
   () =>
-    $fetch<any>('/api/products', {
+    api<any>('/api/products', {
       query: { category: slug, limit: 12, page: page.value, sort: sort.value },
     }),
   { watch: [sort, page] },
