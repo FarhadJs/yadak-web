@@ -12,7 +12,9 @@ export const usePageSeo = (
   const route = useRoute();
   const config = useRuntimeConfig();
 
-  const { data } = useAsyncData('seo:pages', () => $fetch<any[]>('/api/seo'), {
+  const { api } = useApi();
+
+  const { data } = useAsyncData('seo:pages', () => api<any[]>('/api/seo'), {
     default: () => [],
     lazy: false,
   });

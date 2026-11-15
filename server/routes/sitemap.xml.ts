@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
   const base = String(config.public.siteUrl || 'http://localhost:3000').replace(/\/$/, '');
-  const api = String(config.apiInternal || 'http://localhost:4000').replace(/\/$/, '');
+  const api = String(config.public.apiBase || 'http://localhost:4000').replace(/\/$/, '');
 
   let products: any[] = [];
   let categories: any[] = [];

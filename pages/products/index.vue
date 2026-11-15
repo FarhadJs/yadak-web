@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
+const { api } = useApi();
 
 usePageSeo('shop', {
   title: 'خرید آنلاین قطعات MVM | یدک سیستم — نمایندگی فلاحی یزد',
@@ -20,11 +21,11 @@ const params = computed(() => {
 
 const { data, pending } = await useAsyncData(
   'shop:products',
-  () => $fetch<any>('/api/products', { query: params.value }),
+  () => api<any>('/api/products', { query: params.value }),
   { watch: [params] },
 );
 
-const { data: facets } = await useAsyncData('shop:facets', () => $fetch<any>('/api/facets'));
+const { data: facets } = await useAsyncData('shop:facets', () => api<any>('/api/facets'));
 
 const showFilters = ref(false);
 const priceMin = ref(q.value.minPrice || '');

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const { data: categories } = await useAsyncData('nav:categories', () => $fetch<any[]>('/api/categories'), {
+const { data: categories } = await useAsyncData('nav:categories', () => api<any[]>('/api/categories'), {
   default: () => [],
 });
 const year = 1404;
+const { api } = useApi();
 </script>
 
 <template>
