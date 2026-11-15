@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const config = useRuntimeConfig();
-const { data: branches } = await useAsyncData('branches', () => $fetch<any[]>('/api/branches'), {
+const { api } = useApi();
+const { data: branches } = await useAsyncData('branches', () => api<any[]>('/api/branches'), {
   default: () => [],
 });
 

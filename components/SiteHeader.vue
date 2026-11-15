@@ -2,15 +2,16 @@
 const { user, isAdmin, logout } = useAuth();
 const cart = useCart();
 const wishlist = useWishlist();
+const { api } = useApi();
 const route = useRoute();
 
 const search = ref('');
 const mobileOpen = ref(false);
 
-const { data: categories } = await useAsyncData('nav:categories', () => $fetch<any[]>('/api/categories'), {
+const { data: categories } = await useAsyncData('nav:categories', () => api<any[]>('/api/categories'), {
   default: () => [],
 });
-const { data: models } = await useAsyncData('nav:models', () => $fetch<any[]>('/api/models'), {
+const { data: models } = await useAsyncData('nav:models', () => api<any[]>('/api/models'), {
   default: () => [],
 });
 

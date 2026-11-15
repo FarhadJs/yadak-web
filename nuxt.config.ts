@@ -1,5 +1,5 @@
-const apiInternal = process.env.API_INTERNAL_URL || 'http://localhost:4000';
-const siteUrl = process.env.SITE_URL || 'http://localhost:3000';
+const apiBase = process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:4000';
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -37,16 +37,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    apiInternal,
     public: {
+      apiBase,
       siteUrl,
     },
-  },
-
-  routeRules: {
-    // مرورگر و SSR هر دو از دامنه خود سایت به API داخلی پروکسی می‌شوند
-    '/api/**': { proxy: `${apiInternal}/api/**` },
-    '/': { prerender: false },
   },
 
   nitro: {

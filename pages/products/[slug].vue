@@ -3,8 +3,9 @@ const route = useRoute();
 const config = useRuntimeConfig();
 const slug = String(route.params.slug);
 
+const { api } = useApi();
 const { data: product } = await useAsyncData(`product:${slug}`, () =>
-  $fetch<any>(`/api/products/${slug}`),
+  api<any>(`/api/products/${slug}`),
 );
 
 if (!product.value) {

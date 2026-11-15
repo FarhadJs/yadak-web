@@ -7,7 +7,7 @@ const toast = useToast();
 const { data: categories } = await useAsyncData('admin:categories', () => api<any[]>('/api/admin/categories'), {
   default: () => [],
 });
-const { data: models } = await useAsyncData('admin:models', () => $fetch<any[]>('/api/models'), {
+const { data: models } = await useAsyncData('admin:models', () => api<any[]>('/api/models'), {
   default: () => [],
 });
 
