@@ -3,7 +3,7 @@ const route = useRoute();
 const config = useRuntimeConfig();
 const slug = String(route.params.slug);
 
-const { api } = useApi();
+const { api, assetUrl } = useApi();
 const { data: product } = await useAsyncData(`product:${slug}`, () =>
   api<any>(`/api/products/${slug}`),
 );
@@ -38,12 +38,12 @@ const productUrl = computed(() => `${config.public.siteUrl}/products/${product.v
 useSeoMeta({
   ogImage: computed(() =>
     product.value?.image
-      ? `${config.public.siteUrl}${product.value.image}`
+      ? assetUrl(product.value.image)
       : `${config.public.siteUrl}/og-default.svg`,
   ),
   twitterImage: computed(() =>
     product.value?.image
-      ? `${config.public.siteUrl}${product.value.image}`
+      ? assetUrl(product.value.image)
       : `${config.public.siteUrl}/og-default.svg`,
   ),
 });
@@ -58,7 +58,7 @@ useHead({
         name: product.value.name,
         sku: product.value.sku,
         image: product.value.image
-          ? `${config.public.siteUrl}${product.value.image}`
+          ? assetUrl(product.value.image)
           : `${config.public.siteUrl}/og-default.svg`,
         description: product.value.shortDesc,
         brand: { '@type': 'Brand', name: 'MVM' },

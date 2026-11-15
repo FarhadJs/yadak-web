@@ -22,5 +22,12 @@ export const useApi = () => {
     });
   };
 
-  return { api, apiUrl };
+  /** آدرس کامل تصویر؛ در استقرار دو‌هاستی تصاویر از دامنه API می‌آیند */
+  const assetUrl = (url?: string | null) => {
+    if (!url) return '';
+    if (/^(https?:)?\/\//i.test(url) || url.startsWith('data:')) return url;
+    return `${base}${url.startsWith('/') ? url : `/${url}`}`;
+  };
+
+  return { api, apiUrl, assetUrl };
 };
